@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Simple Running</string>
+    <string name="btnStart">Let\'s get started</string>
+    <string name="edtName">Enter your name</string>
+    <string name="edtHeight">Your height in cms</string>
+    <string name="edtWeight">Your weight in kgs</string>
+    <string name="edtAge">Your age</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+</resources>
