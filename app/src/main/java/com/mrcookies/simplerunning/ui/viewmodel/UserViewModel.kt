@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrcookies.simplerunning.data.model.User
-import com.mrcookies.simplerunning.domain.use_cases.UserUseCases
+import com.mrcookies.simplerunning.domain.use_cases.user.UserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.launch

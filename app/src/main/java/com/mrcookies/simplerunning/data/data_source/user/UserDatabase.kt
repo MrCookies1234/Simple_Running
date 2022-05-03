@@ -1,4 +1,4 @@
-package com.mrcookies.simplerunning.data.data_source
+package com.mrcookies.simplerunning.data.data_source.user
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

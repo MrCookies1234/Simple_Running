@@ -1,4 +1,4 @@
-package com.mrcookies.simplerunning.domain.use_cases
+package com.mrcookies.simplerunning.domain.use_cases.user
 
 import com.mrcookies.simplerunning.data.model.User
 import com.mrcookies.simplerunning.domain.repository.UserRepository
