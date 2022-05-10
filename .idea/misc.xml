@@ -3,8 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable-v24/ic_saddas.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable-xhdpi/round_border_layout_second.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic__33.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic__5.xml" value="0.1025" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.212" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_icon288_0_2.xml" value="0.1025" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_icon288_0_3.xml" value="0.196" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_launcher_background.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_saddas.xml" value="0.1025" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/ic_wave.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/round_border.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/round_border_layout.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/selector.xml" value="0.215" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/drawable/splash_background.xml" value="0.212" />
         <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/layout/activity_user.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1025" />
+        <entry key="..\:/Users/Marcos/AndroidStudioProjects/SimpleRunning/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1025" />
       </map>
     </option>
   </component>

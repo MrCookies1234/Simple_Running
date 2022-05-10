@@ -46,6 +46,7 @@ class UserActivity : AppCompatActivity() {
             binding.EdtWeight.text.toString().toInt(),
             sex))
 
+            finish()
         }
 
     }

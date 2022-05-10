@@ -1,79 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.UserActivity">
+    tools:context=".ui.view.UserActivity"
+    android:background="@drawable/background">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/EdtName"
-        android:hint="@string/edtName"
-        android:inputType="text"
-        android:autofillHints="name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_margin="16dp"
+            android:textColor="@color/main"
+            android:text="@string/txtUserTitleFirst"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:id="@+id/txtData"/>
 
-    <EditText
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/EdtHeight"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/EdtName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/layoutName"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtData"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/round_border_layout"
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/EdtWeight"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/EdtHeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNameTitle"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textColor="@color/second"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <EditText
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EdtName"
+            android:padding="10dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/round_border"
+            android:inputType="text"
+            android:autofillHints="name"
+            android:textColor="@color/second"
+            app:layout_constraintTop_toBottomOf="@id/txtNameTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/EdtAge"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/EdtWeight"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/layoutHeight"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:padding="10dp"
+        android:background="@drawable/round_border_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHeightTitle"
+            android:text="Height"
+            android:textStyle="bold"
+
+            android:textColor="@color/second"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="6dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EdtHeight"
+            android:padding="10dp"
+            android:layout_margin="6dp"
+            android:hint="@string/edtHeight"
+            android:background="@drawable/round_border"
+            android:inputType="number"
+            android:autofillHints="name"
+            android:textColor="@color/second"
+            app:layout_constraintTop_toBottomOf="@id/txtHeightTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/layoutWeight"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        android:background="@drawable/round_border_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtWeightTitle"
+            android:text="Weight"
+            android:textStyle="bold"
+
+            android:textColor="@color/second"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EdtWeight"
+            android:padding="10dp"
+            android:layout_margin="6dp"
+            android:hint="@string/edtWeight"
+            android:background="@drawable/round_border"
+            android:inputType="number"
+            android:autofillHints="name"
+            android:textColor="@color/second"
+            app:layout_constraintTop_toBottomOf="@id/txtWeightTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/layoutAge"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        android:background="@drawable/round_border_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAgeTitle"
+            android:text="Age"
+            android:textStyle="bold"
+
+            android:textColor="@color/second"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EdtAge"
+            android:textColorHint="@color/main"
+            android:padding="10dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/round_border"
+            android:inputType="number"
+            android:textColor="@color/second"
+            app:layout_constraintTop_toBottomOf="@id/txtAgeTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="16dp"
         android:id="@+id/rdgSex"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/EdtAge">
+        app:layout_constraintTop_toBottomOf="@id/layoutAge">
         <RadioButton
             android:id="@+id/rdbMale"
-            android:layout_width="wrap_content"
+            android:text="@string/male"
             android:layout_height="wrap_content"
-            android:text="@string/male" />
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="24dp"/>
         <RadioButton
             android:id="@+id/rdbFemale"
-            android:layout_width="wrap_content"
+            android:text="@string/female"
             android:layout_height="wrap_content"
-            android:text="@string/female"/>
+            android:layout_width="wrap_content"/>
     </RadioGroup>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.Button.OutlinedButton"
         android:backgroundTint="@color/action"
         android:id="@+id/btnStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="@android:dimen/thumbnail_height"
+        app:layout_constraintTop_toBottomOf="@id/rdgSex"
         android:text="@string/btnStart"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
