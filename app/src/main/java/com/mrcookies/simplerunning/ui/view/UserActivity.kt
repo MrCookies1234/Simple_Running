@@ -37,19 +37,21 @@ class UserActivity : AppCompatActivity() {
 
     private fun setUpButton() {
         val button = binding.btnStart
-        val user = User(
-            "1",
-            binding.EdtName.text.toString(),
-            binding.EdtAge.text.toString().toInt(),
-            binding.EdtHeight.text.toString().toInt(),
-            binding.EdtWeight.text.toString().toFloat(),
-            sex)
 
         button.setOnClickListener {
             if (!isDataCompleted()){
                 Toast.makeText(this,"PLEASE COMPLETE ALL THE DATA",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+            val user = User(
+                "1",
+                binding.EdtName.text.toString(),
+                binding.EdtAge.text.toString().toInt(),
+                binding.EdtHeight.text.toString().toInt(),
+                binding.EdtWeight.text.toString().toFloat(),
+                sex)
+
             if(!userViewModel.checkHeight(user.height)){
                 Toast.makeText(this,"Please Insert valid height",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
