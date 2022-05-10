@@ -9,7 +9,7 @@ data class User(
     val name: String,
     val age: Int,
     val height: Int,
-    val weight: Int,
+    val weight: Float,
     // 0 = Male, 1 = Female
     val sex: String
 )

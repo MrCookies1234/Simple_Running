@@ -85,7 +85,6 @@
             android:id="@+id/txtHeightTitle"
             android:text="Height"
             android:textStyle="bold"
-
             android:textColor="@color/second"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +131,6 @@
             android:id="@+id/txtWeightTitle"
             android:text="Weight"
             android:textStyle="bold"
-
             android:textColor="@color/second"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,8 +146,7 @@
             android:layout_margin="6dp"
             android:hint="@string/edtWeight"
             android:background="@drawable/round_border"
-            android:inputType="number"
-            android:autofillHints="name"
+            android:inputType="numberDecimal"
             android:textColor="@color/second"
             app:layout_constraintTop_toBottomOf="@id/txtWeightTitle"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +175,6 @@
             android:id="@+id/txtAgeTitle"
             android:text="Age"
             android:textStyle="bold"
-
             android:textColor="@color/second"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -190,8 +186,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/EdtAge"
-            android:textColorHint="@color/main"
+
             android:padding="10dp"
+            android:hint="@string/edtAge"
             android:layout_margin="6dp"
             android:background="@drawable/round_border"
             android:inputType="number"
@@ -209,6 +206,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_margin="16dp"
+        android:checkedButton="@id/rdbMale"
         android:id="@+id/rdgSex"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

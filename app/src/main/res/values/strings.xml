@@ -2,9 +2,9 @@
     <string name="app_name">Simple Running</string>
     <string name="btnStart">Let\'s get started</string>
     <string name="edtName">Enter your name</string>
-    <string name="edtHeight">Your height in Cms</string>
-    <string name="edtWeight">Your weight in Kgs</string>
-    <string name="edtAge">Your age</string>
+    <string name="edtHeight">Your height in Cms. From 140 to 220</string>
+    <string name="edtWeight">Your weight in Kgs. From 40 to 150</string>
+    <string name="edtAge">Your age. From 14 to 80</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="txtUserTitleModify">Let\'s change some things</string>
