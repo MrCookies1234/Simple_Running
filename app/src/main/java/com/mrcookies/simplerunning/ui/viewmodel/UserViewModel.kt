@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mrcookies.simplerunning.data.data_source.user.UserUtility
+import com.mrcookies.simplerunning.domain.util.user.UserUtility
 import com.mrcookies.simplerunning.data.model.User
 import com.mrcookies.simplerunning.domain.use_cases.user.UserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(private val userUseCases: UserUseCases,
-                                        private val userUtility: UserUtility) : ViewModel() {
+                                        private val userUtility: UserUtility
+) : ViewModel() {
 
     private val _userModel = MutableLiveData<User>()
     val userModel : LiveData<User> get() = _userModel

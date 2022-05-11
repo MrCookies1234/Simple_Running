@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.mrcookies.simplerunning.data.data_source.exercise.ExerciseDatabase
 import com.mrcookies.simplerunning.data.data_source.user.UserDatabase
-import com.mrcookies.simplerunning.data.data_source.user.UserUtility
-import com.mrcookies.simplerunning.data.data_source.user.UserUtilityImpl
+import com.mrcookies.simplerunning.domain.util.user.UserUtility
+import com.mrcookies.simplerunning.domain.util.user.UserUtilityImpl
 import com.mrcookies.simplerunning.data.repository.ExerciseRepositoryImpl
 import com.mrcookies.simplerunning.data.repository.UserRepositoryImpl
 import com.mrcookies.simplerunning.domain.repository.ExerciseRepository
@@ -92,7 +92,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserUtility(): UserUtility{
+    fun provideUserUtility(): UserUtility {
         return UserUtilityImpl()
     }
 }

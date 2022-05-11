@@ -1,8 +1,8 @@
-package com.mrcookies.simplerunning.data.data_source.user
+package com.mrcookies.simplerunning.domain.util.user
 
 import kotlin.math.roundToInt
 
-class UserUtilityImpl : UserUtility{
+class UserUtilityImpl : UserUtility {
 
     override fun isHeightInRange(height : Int) : Boolean{
         return height in 140..220
