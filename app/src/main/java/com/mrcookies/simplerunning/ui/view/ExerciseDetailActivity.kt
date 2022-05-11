@@ -30,6 +30,7 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
         if(PermissionsUtility.hasLocationPermissions(this)){
             return
         }
+        //if android api < 29 we don't need background location
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
             EasyPermissions.requestPermissions(this,
                 "This app needs to access your location to properly function.",
@@ -38,6 +39,7 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
+        //if android api > 29 background location needs to be requested separately from other location permissions
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q){
             EasyPermissions.requestPermissions(this,
                 "This app needs to access your location to properly function.",
@@ -50,6 +52,7 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
                 Constants.REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         }else{
+            // if android api = 29 we can ask for background location and others together
             EasyPermissions.requestPermissions(this,
                 "This app needs to access your location to properly function.",
                 Constants.REQUEST_CODE_LOCATION_PERMISSION,

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id("androidx.navigation.safeargs.kotlin")
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 }
 
@@ -68,7 +69,12 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     implementation "androidx.core:core-splashscreen:1.0.0-beta02"
 
+
+    //navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
 }
