@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <action
+        android:id="@+id/action_global_to_newExerciseFragment"
+        app:destination="@id/newExerciseFragment"/>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_newExerciseFragment"
+            app:destination="@id/newExerciseFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_userConfigFragment"
+            app:destination="@id/userConfigFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newExerciseFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.NewExerciseFragment"
+        android:label="fragment_new_exercise"
+        tools:layout="@layout/fragment_new_exercise" />
+
+    <fragment
+        android:id="@+id/userConfigFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.UserConfigFragment"
+        android:label="fragment_user_config"
+        tools:layout="@layout/fragment_user_config" >
+        <action
+            android:id="@+id/action_userConfigFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"/>
+    </fragment>
+
+</navigation>

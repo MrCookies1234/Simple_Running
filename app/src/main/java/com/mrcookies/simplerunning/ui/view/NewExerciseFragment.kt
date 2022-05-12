@@ -1,24 +1,41 @@
 package com.mrcookies.simplerunning.ui.view
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.mrcookies.simplerunning.core.Constants
 import com.mrcookies.simplerunning.core.PermissionsUtility
-import com.mrcookies.simplerunning.databinding.ActivityExerciseDetailBinding
+import com.mrcookies.simplerunning.databinding.FragmentNewExerciseBinding
+import com.mrcookies.simplerunning.services.TrackingService
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import dagger.hilt.android.AndroidEntryPoint
 
-class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+@AndroidEntryPoint
+class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    private lateinit var binding: ActivityExerciseDetailBinding
+    private var _binding: FragmentNewExerciseBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityExerciseDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentNewExerciseBinding.inflate(inflater, container, false)
+        setupButton()
+        return binding.root
+    }
 
+    private fun setupButton(){
+        binding.btnControlExercise.setOnClickListener {
+            sendCommandToService(Constants.ACTION_START_RESUME_SERVICE)
+        }
     }
 
     override fun onStart() {
@@ -26,8 +43,16 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
         super.onStart()
     }
 
+    private fun sendCommandToService(action : String){
+        Intent(requireContext(), TrackingService::class.java).also {
+            it.action =action
+            requireContext().startService(it)
+        }
+
+    }
+
     private fun requestPermissions(){
-        if(PermissionsUtility.hasLocationPermissions(this)){
+        if(PermissionsUtility.hasLocationPermissions(requireContext())){
             return
         }
         //if android api < 29 we don't need background location
@@ -65,7 +90,7 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
 
     override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this,perms)){
-            SettingsDialog.Builder(this).build().show()
+            SettingsDialog.Builder(requireContext()).build().show()
         }else{
             requestPermissions()
         }
@@ -80,5 +105,10 @@ class ExerciseDetailActivity : AppCompatActivity(), EasyPermissions.PermissionCa
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding= null
     }
 }

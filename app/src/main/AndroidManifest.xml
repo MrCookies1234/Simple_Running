@@ -16,25 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleRunning">
         <activity
-            android:name=".ui.view.ExerciseDetailActivity"
+            android:name=".ui.view.MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_exercise_detail"
-            android:theme="@style/Theme.SimpleRunning" >
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.SimpleRunning">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.view.UserActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.view.MainActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.SimpleRunning">
-        </activity>
+
+        <service android:name=".services.TrackingService"
+            android:foregroundServiceType="location"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -1,29 +1,34 @@
 package com.mrcookies.simplerunning.ui.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.mrcookies.simplerunning.data.model.User
-import com.mrcookies.simplerunning.databinding.ActivityUserBinding
+import com.mrcookies.simplerunning.databinding.FragmentUserConfigBinding
 import com.mrcookies.simplerunning.ui.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityUserBinding
+class UserConfigFragment : Fragment() {
+    private var _binding: FragmentUserConfigBinding? = null
+    private val binding get() = _binding!!
     private var sex: String = "0"
     private val userViewModel : UserViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityUserBinding.inflate(layoutInflater)
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentUserConfigBinding.inflate(layoutInflater)
         setUpButton()
         setUprdButton()
-
-        setContentView(binding.root)
+        return binding.root
     }
 
     private fun setUprdButton(){
@@ -40,7 +45,7 @@ class UserActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             if (!isDataCompleted()){
-                Toast.makeText(this,"PLEASE COMPLETE ALL THE DATA",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"PLEASE COMPLETE ALL THE DATA", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -53,22 +58,28 @@ class UserActivity : AppCompatActivity() {
                 sex)
 
             if(!userViewModel.checkHeight(user.height)){
-                Toast.makeText(this,"Please Insert valid height",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please Insert valid height", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!userViewModel.checkWeight(user.weight)){
-                Toast.makeText(this,"Please Insert valid weight",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please Insert valid weight", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!userViewModel.checkAge(user.age)){
-                Toast.makeText(this,"Please Insert valid age",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please Insert valid age", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             userViewModel.insertUser(user)
-            finish()
+            findNavController().navigate(UserConfigFragmentDirections.actionUserConfigFragmentToMainFragment())
+
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun isDataCompleted() : Boolean{
@@ -77,5 +88,4 @@ class UserActivity : AppCompatActivity() {
         }
         return true
     }
-
 }
