@@ -1,7 +1,11 @@
 package com.mrcookies.simplerunning.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.mrcookies.simplerunning.data.data_source.exercise.ExerciseDatabase
 import com.mrcookies.simplerunning.data.data_source.user.UserDatabase
 import com.mrcookies.simplerunning.domain.util.user.UserUtility
@@ -95,4 +99,5 @@ object AppModule {
     fun provideUserUtility(): UserUtility {
         return UserUtilityImpl()
     }
+
 }
