@@ -34,8 +34,5 @@ class MainFragment: Fragment() {
         binding.fabNewExercise.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToNewExerciseFragment())
         }
-        binding.fabNewExercise2.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToUserConfigFragment())
-        }
     }
 }
