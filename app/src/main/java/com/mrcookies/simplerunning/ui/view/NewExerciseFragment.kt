@@ -31,7 +31,6 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var map : GoogleMap? = null
 
-    private var isTracking = false
     private var pointsInMap = mutableListOf<PolyLine>()
 
     private var curTimeInMillis = 0L
@@ -87,7 +86,7 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-    private fun moveCameratoUser(){
+    private fun moveCameraToUser(){
         if(pointsInMap.isNotEmpty() && pointsInMap.last().isNotEmpty()){
             map?.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
@@ -98,23 +97,11 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-    private fun toggleRun(){
-        if(isTracking){
-            sendCommandToService(Constants.ACTION_PAUSE_SERVICE)
-        }else{
-            sendCommandToService(Constants.ACTION_START_RESUME_SERVICE)
-        }
-    }
-
     private fun subscribe(){
-        TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
-            updateTracking(it)
-        })
-
         TrackingService.pointsInMap.observe(viewLifecycleOwner, Observer {
             pointsInMap = it
             addLatestPolyline()
-            moveCameratoUser()
+            moveCameraToUser()
         })
 
         TrackingService.timeinMillis.observe(viewLifecycleOwner , Observer {
@@ -122,15 +109,6 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
             binding.txvTimer.text = formattedTime
         })
-    }
-
-    private fun updateTracking(isTracking : Boolean){
-        this.isTracking = isTracking
-        if(!isTracking){
-            binding.fabStart.visibility = View.VISIBLE
-        }else{
-
-        }
     }
 
     private fun addLatestPolyline(){
@@ -148,7 +126,20 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun setupButton(){
         binding.fabStart.setOnClickListener {
-            toggleRun()
+            binding.fabStart.visibility = View.GONE
+            binding.fabPause.visibility = View.VISIBLE
+            binding.fabStop.visibility = View.VISIBLE
+            sendCommandToService(Constants.ACTION_START_RESUME_SERVICE)
+        }
+
+        binding.fabPause.setOnClickListener {
+            binding.fabStart.visibility = View.VISIBLE
+            binding.fabPause.visibility = View.GONE
+            sendCommandToService(Constants.ACTION_PAUSE_SERVICE)
+        }
+
+        binding.fabStop.setOnClickListener {
+            sendCommandToService(Constants.ACTION_STOP_SERVICE)
         }
     }
 
@@ -160,7 +151,7 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun sendCommandToService(action : String){
         Intent(requireContext(), TrackingService::class.java).also {
-            it.action =action
+            it.action = action
             requireContext().startService(it)
         }
 
