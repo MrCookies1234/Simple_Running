@@ -6,21 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.NewExerciseFragment">
 
-    <fragment
+    <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/mapFragment"
-        class="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mapFragment"
+        android:id="@+id/fabStart"
+        android:src="@drawable/ic_baseline_play_arrow_24"
+        android:backgroundTint="@color/main"
+        android:tint="@color/action"
+        app:layout_constraintTop_toBottomOf="@id/map"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="start"
-        android:textColor="@color/second"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabPause"
+        android:visibility="gone"
+        android:backgroundTint="@color/main"
+        android:tint="@color/action"
+        android:src="@drawable/ic_baseline_pause_24"
+        app:layout_constraintTop_toBottomOf="@id/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabStop"
+        android:tint="@color/red"
+        android:backgroundTint="@color/main"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_stop_24"
+        app:layout_constraintTop_toBottomOf="@id/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txvTimer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/btnControlExercise"/>
+        app:layout_constraintTop_toBottomOf="@id/map"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

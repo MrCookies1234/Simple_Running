@@ -8,9 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.PolylineOptions
+import com.mrcookies.simplerunning.R
 import com.mrcookies.simplerunning.core.Constants
 import com.mrcookies.simplerunning.core.PermissionsUtility
+import com.mrcookies.simplerunning.core.TrackingUtility
 import com.mrcookies.simplerunning.databinding.FragmentNewExerciseBinding
+import com.mrcookies.simplerunning.services.PolyLine
 import com.mrcookies.simplerunning.services.TrackingService
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
@@ -22,6 +29,13 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var _binding: FragmentNewExerciseBinding? = null
     private val binding get() = _binding!!
 
+    private var map : GoogleMap? = null
+
+    private var isTracking = false
+    private var pointsInMap = mutableListOf<PolyLine>()
+
+    private var curTimeInMillis = 0L
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,18 +43,119 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     ): View? {
         _binding = FragmentNewExerciseBinding.inflate(inflater, container, false)
         setupButton()
+        setupMap(savedInstanceState)
+        subscribe()
         return binding.root
     }
 
-    private fun setupButton(){
-        binding.btnControlExercise.setOnClickListener {
+    private fun setupMap(savedInstanceState: Bundle?){
+        binding.map.onCreate(savedInstanceState)
+        binding.map.getMapAsync{
+            map = it
+            addAllPolylines()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.map.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.map.onStop()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.map.onPause()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.map.onLowMemory()
+    }
+
+    private fun addAllPolylines(){
+        for (polyline in pointsInMap){
+            val options = PolylineOptions()
+                .color(R.color.action)
+                .width(Constants.POLYLINE_WIDTH)
+                .addAll(polyline)
+
+            map?.addPolyline(options)
+        }
+    }
+
+    private fun moveCameratoUser(){
+        if(pointsInMap.isNotEmpty() && pointsInMap.last().isNotEmpty()){
+            map?.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    pointsInMap.last().last(),
+                    Constants.MAP_ZOOM
+                )
+            )
+        }
+    }
+
+    private fun toggleRun(){
+        if(isTracking){
+            sendCommandToService(Constants.ACTION_PAUSE_SERVICE)
+        }else{
             sendCommandToService(Constants.ACTION_START_RESUME_SERVICE)
+        }
+    }
+
+    private fun subscribe(){
+        TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
+            updateTracking(it)
+        })
+
+        TrackingService.pointsInMap.observe(viewLifecycleOwner, Observer {
+            pointsInMap = it
+            addLatestPolyline()
+            moveCameratoUser()
+        })
+
+        TrackingService.timeinMillis.observe(viewLifecycleOwner , Observer {
+            curTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
+            binding.txvTimer.text = formattedTime
+        })
+    }
+
+    private fun updateTracking(isTracking : Boolean){
+        this.isTracking = isTracking
+        if(!isTracking){
+            binding.fabStart.visibility = View.VISIBLE
+        }else{
+
+        }
+    }
+
+    private fun addLatestPolyline(){
+        if(pointsInMap.isNotEmpty() && pointsInMap.last().size> 1){
+            val preLastLatLng = pointsInMap.last()[pointsInMap.last().size -2]
+            val lastLatLng = pointsInMap.last().last()
+            val polyLineOptions = PolylineOptions()
+                .color(R.color.action)
+                .width(Constants.POLYLINE_WIDTH)
+                .add(preLastLatLng)
+                .add(lastLatLng)
+            map?.addPolyline(polyLineOptions)
+        }
+    }
+
+    private fun setupButton(){
+        binding.fabStart.setOnClickListener {
+            toggleRun()
         }
     }
 
     override fun onStart() {
         requestPermissions()
         super.onStart()
+        binding.map.onStart()
     }
 
     private fun sendCommandToService(action : String){
@@ -109,6 +224,12 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onDestroy() {
         super.onDestroy()
+        binding.map?.onDestroy()
         _binding= null
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.map.onSaveInstanceState(outState)
     }
 }

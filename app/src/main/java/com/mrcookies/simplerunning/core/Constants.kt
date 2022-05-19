@@ -11,6 +11,10 @@ object Constants {
 
     const val MAX_LOCATION_UPDATE_INTERVAL = 5000L
     const val MIN_LOCATION_UPDATE_INTERVAL = 2000L
+    const val TIMER_UPDATE_INTERVAL = 50L
+
+    const val POLYLINE_WIDTH = 8f
+    const val MAP_ZOOM = 15f
 
     const val NOTIFICATION_CHANNEL_ID ="TRACKING_CHANNEL"
     const val NOTIFICATION_CHANNEL_NAME ="TRACKING"
