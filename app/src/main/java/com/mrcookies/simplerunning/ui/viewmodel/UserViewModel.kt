@@ -23,13 +23,6 @@ class UserViewModel @Inject constructor(private val userUseCases: UserUseCases,
     private val _userModel = MutableLiveData<User>()
     val userModel : LiveData<User> get() = _userModel
 
-    private val _isLoading = MutableStateFlow(true)
-    val isLoading = _isLoading.asStateFlow()
-
-    init {
-        getUser()
-    }
-
     fun checkHeight(height: Int) : Boolean{
         return userUtility.isHeightInRange(height)
     }
@@ -46,14 +39,6 @@ class UserViewModel @Inject constructor(private val userUseCases: UserUseCases,
         viewModelScope.launch{
             userUseCases.insertUser(user)
             Log.i("Inserted :", user.name)
-        }
-    }
-
-    fun getUser(){
-        viewModelScope.launch {
-            _isLoading.value = true
-            _userModel.postValue(userUseCases.getUser())
-            _isLoading.value = false
         }
     }
 

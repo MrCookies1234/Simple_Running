@@ -1,4 +1,4 @@
-package com.mrcookies.simplerunning.ui.view
+package com.mrcookies.simplerunning.ui.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,9 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UserConfigFragment : Fragment() {
+
     private var _binding: FragmentUserConfigBinding? = null
     private val binding get() = _binding!!
+
     private var sex: String = "0"
+
     private val userViewModel : UserViewModel by viewModels()
 
     override fun onCreateView(
@@ -27,11 +30,11 @@ class UserConfigFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentUserConfigBinding.inflate(layoutInflater)
         setUpButton()
-        setUprdButton()
+        setUpRdButton()
         return binding.root
     }
 
-    private fun setUprdButton(){
+    private fun setUpRdButton(){
         binding.rdbMale.setOnClickListener {
             sex = "0"
         }

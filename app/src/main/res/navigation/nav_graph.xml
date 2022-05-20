@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.mrcookies.simplerunning.ui.view.MainFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.fragment.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_newExerciseFragment"
@@ -23,13 +23,17 @@
 
     <fragment
         android:id="@+id/newExerciseFragment"
-        android:name="com.mrcookies.simplerunning.ui.view.NewExerciseFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.fragment.NewExerciseFragment"
         android:label="fragment_new_exercise"
-        tools:layout="@layout/fragment_new_exercise" />
+        tools:layout="@layout/fragment_new_exercise" >
+        <action
+            android:id="@+id/action_newExerciseFragment_to_MainFragment"
+            app:destination="@id/mainFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/userConfigFragment"
-        android:name="com.mrcookies.simplerunning.ui.view.UserConfigFragment"
+        android:name="com.mrcookies.simplerunning.ui.view.fragment.UserConfigFragment"
         android:label="fragment_user_config"
         tools:layout="@layout/fragment_user_config" >
         <action

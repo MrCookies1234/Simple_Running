@@ -1,4 +1,4 @@
-package com.mrcookies.simplerunning.ui.view
+package com.mrcookies.simplerunning.ui.view.fragment
 
 import android.Manifest
 import android.content.Intent
@@ -8,26 +8,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.mrcookies.simplerunning.R
 import com.mrcookies.simplerunning.core.Constants
+import com.mrcookies.simplerunning.core.ExerciseUtility
 import com.mrcookies.simplerunning.core.PermissionsUtility
 import com.mrcookies.simplerunning.core.TrackingUtility
-import com.mrcookies.simplerunning.databinding.FragmentNewExerciseBinding
+import com.mrcookies.simplerunning.data.model.Exercise
 import com.mrcookies.simplerunning.services.PolyLine
 import com.mrcookies.simplerunning.services.TrackingService
 import com.vmadalin.easypermissions.EasyPermissions
+import com.mrcookies.simplerunning.databinding.FragmentNewExerciseBinding
+import com.mrcookies.simplerunning.ui.viewmodel.NewExerciseViewModel
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.math.round
 
 @AndroidEntryPoint
 class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var _binding: FragmentNewExerciseBinding? = null
     private val binding get() = _binding!!
+
+    private val newExerciseViewModel : NewExerciseViewModel by viewModels()
 
     private var map : GoogleMap? = null
 
@@ -124,6 +134,36 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
+    private fun zoomToSeeWholeTrack(){
+        val bounds = LatLngBounds.Builder()
+        for(polyline in pointsInMap){
+            for (pos in polyline){
+                bounds.include(pos)
+            }
+        }
+
+        map?.moveCamera(
+            CameraUpdateFactory.newLatLngBounds(bounds.build(),
+                binding.map.width,
+                binding.map.height,
+                (binding.map.height * 0.05f).toInt())
+        )
+    }
+
+    private fun endRun(){
+        map?.snapshot {
+            var distanceInMeters = 0f
+            for (polyline in pointsInMap){
+                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline)
+            }
+            val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) /10
+            val dateTimeStamp = Calendar.getInstance().timeInMillis
+            val caloriesBurned = ExerciseUtility.calculateCaloriesFromExercise(newExerciseViewModel.user.weight,avgSpeed,curTimeInMillis, 0)
+            val exercise = Exercise(it,dateTimeStamp,curTimeInMillis,caloriesBurned,0, distanceInMeters, avgSpeed)
+            newExerciseViewModel.insertExercise(exercise)
+        }
+    }
+
     private fun setupButton(){
         binding.fabStart.setOnClickListener {
             binding.fabStart.visibility = View.GONE
@@ -139,7 +179,10 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
         binding.fabStop.setOnClickListener {
+            zoomToSeeWholeTrack()
+            endRun()
             sendCommandToService(Constants.ACTION_STOP_SERVICE)
+            findNavController().navigate(NewExerciseFragmentDirections.actionNewExerciseFragmentToMainFragment())
         }
     }
 

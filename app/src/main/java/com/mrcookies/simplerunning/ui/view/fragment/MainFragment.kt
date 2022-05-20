@@ -1,4 +1,4 @@
-package com.mrcookies.simplerunning.ui.view
+package com.mrcookies.simplerunning.ui.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
