@@ -51,4 +51,7 @@ interface ExerciseDAO {
     @Query("SELECT AVG(avgSpeed) from Exercise where type = 0")
     suspend fun getAvgSpeedRun(): Float
 
+    @Query("SELECT Count(*) from Exercise")
+    suspend fun getTotalNumber() : Int
+
 }

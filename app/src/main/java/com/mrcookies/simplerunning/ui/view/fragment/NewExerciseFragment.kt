@@ -158,7 +158,7 @@ class NewExerciseFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
             val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) /10
             val dateTimeStamp = Calendar.getInstance().timeInMillis
-            val caloriesBurned = ExerciseUtility.calculateCaloriesFromExercise(newExerciseViewModel.user.weight,avgSpeed,curTimeInMillis, 0)
+            val caloriesBurned = ExerciseUtility.calculateCaloriesFromExercise(80f,avgSpeed,curTimeInMillis, 0)
             val exercise = Exercise(it,dateTimeStamp,curTimeInMillis,caloriesBurned,0, distanceInMeters, avgSpeed)
             newExerciseViewModel.insertExercise(exercise)
         }

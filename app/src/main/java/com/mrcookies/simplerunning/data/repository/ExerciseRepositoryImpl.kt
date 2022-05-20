@@ -66,4 +66,8 @@ class ExerciseRepositoryImpl @Inject constructor(private val exerciseDAO: Exerci
         return exerciseDAO.getAvgSpeedRun()
     }
 
+    override suspend fun getTotalNumber(): Int{
+        return exerciseDAO.getTotalNumber()
+    }
+
 }

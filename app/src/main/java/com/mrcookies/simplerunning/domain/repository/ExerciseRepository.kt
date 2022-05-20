@@ -19,4 +19,5 @@ interface ExerciseRepository {
     suspend fun getTotalCaloriesRun(): Int
     suspend fun getAvgSpeedBike(): Float
     suspend fun getAvgSpeedRun(): Float
+    suspend fun getTotalNumber(): Int
 }

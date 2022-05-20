@@ -15,5 +15,6 @@ data class ExerciseUseCases (
     val getTotalDistanceBikeUseCase: GetTotalDistanceBikeUseCase,
     val getTotalDistanceRunUseCase: GetTotalDistanceRunUseCase,
     val getTotalTimeBikeUseCase: GetTotalTimeBikeUseCase,
-    val getTotalTimeRunUseCase: GetTotalTimeRunUseCase
+    val getTotalTimeRunUseCase: GetTotalTimeRunUseCase,
+    val getTotalNumberUseCase: GetTotalNumberUseCase
 )

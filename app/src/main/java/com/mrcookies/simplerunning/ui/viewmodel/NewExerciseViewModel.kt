@@ -22,6 +22,10 @@ class NewExerciseViewModel @Inject constructor(private val exerciseUseCases : Ex
     private val _userModel = MutableLiveData<User>()
     val userModel : LiveData<User> get() = _userModel
 
+    init{
+        getUser()
+    }
+
     private fun getUser(){
         viewModelScope.launch {
             user = userUserCases.getUser.invoke()

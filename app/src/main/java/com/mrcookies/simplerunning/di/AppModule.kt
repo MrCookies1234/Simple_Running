@@ -90,7 +90,8 @@ object AppModule {
             getTotalTimeRunUseCase = GetTotalTimeRunUseCase(repository),
             getAvgSpeedBikeUseCase = GetAvgSpeedBikeUseCase(repository),
             getAvgSpeedRunUseCase = GetAvgSpeedRunUseCase(repository),
-            getAllByDateUseCase = GetAllByDateUseCase(repository)
+            getAllByDateUseCase = GetAllByDateUseCase(repository),
+            getTotalNumberUseCase = GetTotalNumberUseCase(repository)
         )
     }
 
